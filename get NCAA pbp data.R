@@ -3,14 +3,23 @@
 # analytics from these data
 # https://kentuckysportsradio.com/basketball-2/analytics-show-kentuckys-shooters-take-the-worst-shots-in-college-basketball/
 
+# old espn pbp url
+# https://www.espn.com/mens-college-basketball/playbyplay?gameId=401083442
+
+
+# get old schedule
+# https://www.espn.com/mens-college-basketball/team/schedule/_/id/2305/season/2020
+# https://www.espn.com/mens-college-basketball/team/schedule/_/id/2305/season/2018
+
 
 #devtools::install_github("lbenz730/ncaahoopR")
 
 library(tidyverse)
+library(magrittr)
 library(ncaahoopR)
 
 # only pulls current season right now
-kansas = get_pbp(team = 'Duke', season = '2018-19')
+kansas = get_pbp(team = 'Duke', season = '2018')
 
 # works
 get_roster('Kansas', season = '2018-19')
@@ -44,7 +53,7 @@ for (i in teams) {
   #### create dataframe of games and opponents for each team ####
   get_pbp(toString(i), season = season_pull) -> team_df
   
-  magrittr::team_df %<>%
+  team_df %<>%
     mutate(season = season_pull)
   
   # add these to a running list of dataframes
